@@ -4,6 +4,10 @@
 
 @section('page_styles')
 <style>
+.page-content{
+    margin-top: 0;
+    padding-bottom: 0px !important;
+}
 .register-shell {
     padding: 70px 0px;
     min-height: 75vh;
