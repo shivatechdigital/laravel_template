@@ -1,12 +1,11 @@
 ﻿@php
-    $routeName = request()->route()?->getName() ?? '';
     $isHome = request()->routeIs('beauty_salon.index');
     $isAbout = request()->routeIs('beauty_salon.about-us');
     $isService = request()->routeIs('beauty_salon.service') || request()->routeIs('beauty_salon.services-details');
     $isPortfolio = request()->routeIs('beauty_salon.portfolio-grid-2');
     $isBlog = request()->routeIs('beauty_salon.blog-*') || request()->routeIs('beauty_salon.post-*');
     $isContact = request()->routeIs('beauty_salon.contact');
-    $isMore = request()->routeIs('beauty_salon.booking') || request()->routeIs('beauty_salon.team') || request()->routeIs('beauty_salon.login');
+    $isMore = request()->routeIs('beauty_salon.booking') || request()->routeIs('beauty_salon.team') || request()->routeIs('beauty_salon.login') || request()->routeIs('beauty_salon.register') || request()->routeIs('dashboard') || request()->routeIs('admin.dashboard') || request()->routeIs('user.dashboard');
 @endphp
 
 <header class="site-header header mo-left">
@@ -55,7 +54,21 @@
                             <ul class="sub-menu">
                                 <li><a href="{{ route('beauty_salon.booking') }}" class="dez-page">Booking</a></li>
                                 <li><a href="{{ route('beauty_salon.team') }}" class="dez-page">Our Team</a></li>
-                                <li><a href="{{ route('beauty_salon.login') }}" class="dez-page">Login</a></li>
+                                @guest
+                                    <li><a href="{{ route('beauty_salon.login') }}" class="dez-page">Login</a></li>
+                                    <li><a href="{{ route('beauty_salon.register') }}" class="dez-page">Sign Up</a></li>
+                                @endguest
+                                @auth
+                                    <li>
+                                        <a href="{{ auth()->user()->role === 'admin' ? route('admin.dashboard') : route('user.dashboard') }}" class="dez-page">Dashboard</a>
+                                    </li>
+                                    <li>
+                                        <form method="post" action="{{ route('auth.logout') }}" style="padding: 10px 20px;">
+                                            @csrf
+                                            <button type="submit" style="border:none;background:transparent;color:#111;font-weight:600;cursor:pointer;padding:0;">Logout</button>
+                                        </form>
+                                    </li>
+                                @endauth
                             </ul>
                         </li>
                     </ul>

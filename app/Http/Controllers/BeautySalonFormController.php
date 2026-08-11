@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -37,7 +38,21 @@ class BeautySalonFormController extends Controller
             'notes' => ['nullable', 'string', 'max:2000'],
         ]);
 
+        $booking = Booking::create([
+            'user_id' => $request->user()?->id,
+            'category' => $validated['category'],
+            'service' => $validated['service'],
+            'appointment_date' => $validated['appointment_date'],
+            'appointment_time' => $validated['appointment_time'],
+            'customer_name' => $validated['customer_name'],
+            'customer_phone' => $validated['customer_phone'],
+            'customer_email' => $validated['customer_email'],
+            'notes' => $validated['notes'] ?? null,
+            'status' => 'pending',
+        ]);
+
         Log::info('Beauty salon booking request submitted.', [
+            'booking_id' => $booking->id,
             'name' => $validated['customer_name'],
             'email' => $validated['customer_email'],
             'date' => $validated['appointment_date'],
