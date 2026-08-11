@@ -5,6 +5,7 @@
 @section('page_styles')
 <style>
 .auth-shell {
+    padding:70px 0px;
     min-height: 75vh;
     display: grid;
     place-items: center;
