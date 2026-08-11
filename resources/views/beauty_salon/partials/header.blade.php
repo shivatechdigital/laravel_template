@@ -9,7 +9,7 @@
 @endphp
 
 <header class="site-header header mo-left">
-    <div class="top-bar bg-primary text-white" style="margin-top:-50px;">
+    <div class="top-bar bg-primary text-white">
         <div class="container">
             <div class="row d-flex justify-content-between">
                 <div class="dlab-topbar-left">
