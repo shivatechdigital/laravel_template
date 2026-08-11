@@ -41,5 +41,13 @@
 </div>
 
 @yield('page_scripts')
+<script>
+window.addEventListener('load', function () {
+    var loader = document.getElementById('loading-area');
+    if (loader) {
+        loader.style.display = 'none';
+    }
+});
+</script>
 </body>
 </html>
