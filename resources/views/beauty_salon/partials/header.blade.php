@@ -2,10 +2,12 @@
     $isHome = request()->routeIs('beauty_salon.index');
     $isAbout = request()->routeIs('beauty_salon.about-us');
     $isService = request()->routeIs('beauty_salon.service') || request()->routeIs('beauty_salon.services-details');
+    $isPricing = request()->routeIs('beauty_salon.pricing');
+    $isMembership = request()->routeIs('beauty_salon.memberships');
     $isPortfolio = request()->routeIs('beauty_salon.portfolio-grid-2');
     $isBlog = request()->routeIs('beauty_salon.blog-*') || request()->routeIs('beauty_salon.post-*');
     $isContact = request()->routeIs('beauty_salon.contact');
-    $isMore = request()->routeIs('beauty_salon.booking') || request()->routeIs('beauty_salon.team') || request()->routeIs('beauty_salon.login') || request()->routeIs('beauty_salon.register') || request()->routeIs('dashboard') || request()->routeIs('admin.dashboard') || request()->routeIs('user.dashboard');
+    $isMore = request()->routeIs('beauty_salon.booking') || request()->routeIs('beauty_salon.team') || request()->routeIs('beauty_salon.login') || request()->routeIs('beauty_salon.register') || request()->routeIs('beauty_salon.memberships') || request()->routeIs('dashboard') || request()->routeIs('admin.dashboard') || request()->routeIs('user.dashboard');
 @endphp
 
 <header class="site-header header mo-left">
@@ -20,12 +22,7 @@
                 </div>
                 <div class="dlab-topbar-right topbar-social">
                     <ul>
-                        <li><a target="_blank" href="https://www.facebook.com/" class="site-button-link facebook hover"><i class="fa fa-facebook"></i></a></li>
-                        <li><a target="_blank" href="https://www.google.com/" class="site-button-link google-plus hover"><i class="fa fa-google-plus"></i></a></li>
-                        <li><a target="_blank" href="https://twitter.com/" class="site-button-link twitter hover"><i class="fa fa-twitter"></i></a></li>
-                        <li><a target="_blank" href="https://www.instagram.com/" class="site-button-link instagram hover"><i class="fa fa-instagram"></i></a></li>
-                        <li><a target="_blank" href="https://www.linkedin.com/" class="site-button-link linkedin hover"><i class="fa fa-linkedin"></i></a></li>
-                        <li><a target="_blank" href="https://www.youtube.com/" class="site-button-link youtube hover"><i class="fa fa-youtube-play"></i></a></li>
+                        @include('beauty_salon.partials.social-links', ['mode' => 'topbar'])
                     </ul>
                 </div>
             </div>
@@ -47,6 +44,8 @@
                         <li class="{{ $isHome ? 'active' : '' }}"><a href="{{ route('beauty_salon.index') }}">Home</a></li>
                         <li class="{{ $isAbout ? 'active' : '' }}"><a href="{{ route('beauty_salon.about-us') }}" class="dez-page">About Us</a></li>
                         <li class="{{ $isService ? 'active' : '' }}"><a href="{{ route('beauty_salon.service') }}" class="dez-page">Services</a></li>
+                        <li class="{{ $isPricing ? 'active' : '' }}"><a href="{{ route('beauty_salon.pricing') }}" class="dez-page">Pricing</a></li>
+                        <li class="{{ $isMembership ? 'active' : '' }}"><a href="{{ route('beauty_salon.memberships') }}" class="dez-page">Memberships</a></li>
                         <li class="{{ $isPortfolio ? 'active' : '' }}"><a href="{{ route('beauty_salon.portfolio-grid-2') }}" class="dez-page">Portfolio</a></li>
                         <li class="{{ $isBlog ? 'active' : '' }}"><a href="{{ route('beauty_salon.blog-grid') }}">Blog</a></li>
                         <li class="{{ $isContact ? 'active' : '' }}"><a href="{{ route('beauty_salon.contact') }}">Contact</a></li>

@@ -9,6 +9,16 @@
 @endsection
 
 @section('content')
+@php
+	$homeWhyData = $homeWhyChoose?->data ?? [];
+	$whyBullets = $homeWhyData['bullets'] ?? [
+		'fully focused on accessibility',
+		'Based on modern design concept',
+		'impressive and attractive design with graceful features',
+		'More creative with smoothness and flexibility',
+		'Unlimited power and customization possibilities',
+	];
+@endphp
 <div class="page-content">
 		<!-- Main Slider -->
         <div class="rev-slider">
@@ -243,14 +253,15 @@
 				<div class="row">
 					<div class="col-lg-5 m-b30 align-self-center">
 						<div class="dis-tbl-cell  m-b30">							
-							<h2 class="m-t0 m-b10">Why Our Clients Choose Us </h2>
-							<h6 class="fw7 m-b15">We are the leading beauty salon in LA providing high-quality hairdressing, makeup, and skin care services to everyone.</h6>
+							<h2 class="m-t0 m-b10">{{ $homeWhyChoose?->title ?: 'Why Our Clients Choose Us' }}</h2>
+							<h6 class="fw7 m-b15">{{ $homeWhyChoose?->subtitle ?: 'We are the leading beauty salon providing high-quality hairdressing, makeup, and skin care services to everyone.' }}</h6>
+							@if ($homeWhyChoose?->content)
+								<p>{{ $homeWhyChoose->content }}</p>
+							@endif
 							<ul class="list-angle-right">
-								<li>fully focused on accessibility</li>
-								<li>Based on modern design concept</li>
-								<li>impressive and attractive design with graceful features</li>
-								<li>More creative with smoothness and flexibility </li>
-								<li>Unlimited power and customization possibilities</li>
+								@foreach ($whyBullets as $bullet)
+									<li>{{ $bullet }}</li>
+								@endforeach
 							</ul>
 							<a href="{{ route('beauty_salon.about-us') }}" class="site-button m-r15">About US <i class="ti-arrow-right m-l10"></i></a>
 							<a href="{{ route('beauty_salon.about-us') }}" class="site-button-secondry ">Read More <i class="ti-arrow-right m-l10"></i></a>
@@ -309,60 +320,33 @@
 					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the.</p>
 				</div>
 				<div class="row">
-					<div class="col-lg-4 col-md-6 col-sm-6 p-lr0">
-						<div class="icon-bx-wraper center p-a30">
-							<div class="icon-lg radius m-b20"> <a href="{{ route('beauty_salon.services-details') }}" class="icon-cell"><i class="flaticon-barbershop"></i></a> </div>
-							<div class="icon-content">
-								<h5 class="dez-tilte"><a href="{{ route('beauty_salon.services-details') }}">Haircut & Styling</a></h5>
-								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</p>
+					@forelse ($services as $service)
+						<div class="col-lg-4 col-md-6 col-sm-6 p-lr0">
+							<div class="icon-bx-wraper center p-a30" style="min-height: 280px;">
+								<div class="icon-content">
+									<h5 class="dez-tilte"><a href="{{ route('beauty_salon.services-details') }}">{{ $service->title }}</a></h5>
+									@if ($service->description)
+										<p>{{ $service->description }}</p>
+									@endif
+									@if ($service->price || $service->duration_minutes)
+										<p class="m-b0">
+											@if ($service->price)
+												<strong>Rs. {{ number_format((float) $service->price, 2) }}</strong>
+											@endif
+											@if ($service->price && $service->duration_minutes)
+												<span> | </span>
+											@endif
+											@if ($service->duration_minutes)
+												<span>{{ $service->duration_minutes }} min</span>
+											@endif
+										</p>
+									@endif
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-lg-4 col-md-6 col-sm-6 p-lr0">
-						<div class="icon-bx-wraper center p-a30">
-							<div class="icon-lg radius m-b20"> <a href="{{ route('beauty_salon.services-details') }}" class="icon-cell"><i class="flaticon-makeup"></i></a> </div>
-							<div class="icon-content">
-								<h5 class="dez-tilte"><a href="{{ route('beauty_salon.services-details') }}">Makeup</a></h5>
-								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-6 col-sm-6 p-lr0">
-						<div class="icon-bx-wraper center p-a30">
-							<div class="icon-lg radius m-b20"> <a href="{{ route('beauty_salon.services-details') }}" class="icon-cell"><i class="flaticon-makeup-1"></i></a> </div>
-							<div class="icon-content">
-								<h5 class="dez-tilte"><a href="{{ route('beauty_salon.services-details') }}">Manicure & Pedicure</a></h5>
-								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-6 col-sm-6 p-lr0">
-						<div class="icon-bx-wraper center p-a30">
-							<div class="icon-lg radius m-b20"> <a href="{{ route('beauty_salon.services-details') }}" class="icon-cell"><i class="flaticon-woman-1"></i></a> </div>
-							<div class="icon-content">
-								<h5 class="dez-tilte"><a href="{{ route('beauty_salon.services-details') }}">Skin Care</a></h5>
-								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-6 col-sm-6 p-lr0">
-						<div class="icon-bx-wraper center p-a30">
-							<div class="icon-lg radius m-b20"> <a href="{{ route('beauty_salon.services-details') }}" class="icon-cell"><i class="flaticon-woman"></i></a> </div>
-							<div class="icon-content">
-								<h5 class="dez-tilte"><a href="{{ route('beauty_salon.services-details') }}">Body Treatment</a></h5>
-								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-6 col-sm-6 p-lr0">
-						<div class="icon-bx-wraper center p-a30">
-							<div class="icon-lg radius m-b20"> <a href="{{ route('beauty_salon.services-details') }}" class="icon-cell"><i class="flaticon-candle-1"></i></a> </div>
-							<div class="icon-content">
-								<h5 class="dez-tilte"><a href="{{ route('beauty_salon.services-details') }}">Massage</a></h5>
-								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</p>
-							</div>
-						</div>
-					</div>
+					@empty
+						<div class="col-12 text-center"><p>No services available.</p></div>
+					@endforelse
 				</div>
 			</div>
 		</div>
@@ -378,82 +362,34 @@
 					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the.</p>
 				</div>
 				<div class="row">
-					<div class="col-lg-6 col-md-12 col-sm-12">
-						<div class="price-tbl d-flex">
-							<div class="flex-grow-1">
-								<h4 class="text-primary">Deep Tissue Massage</h4>
-								<p>60 â€“ 100 Minute Session </p>
-							</div>
-							<div class="price-val align-self-center">
-								<h3 class="text-secondry">$40.00</h3>
-							</div>
+					@php $chunkedPlans = $plans->chunk((int) ceil(max($plans->count(), 1) / 2)); @endphp
+					@foreach ($chunkedPlans as $planChunk)
+						<div class="col-lg-6 col-md-12 col-sm-12">
+							@foreach ($planChunk as $plan)
+								@php $subPrices = $plan->sub_service_prices ?? []; @endphp
+								@if (empty($subPrices))
+									<div class="price-tbl d-flex">
+										<div class="flex-grow-1">
+											<h4 class="text-primary">{{ $plan->name }}</h4>
+											<p>{{ $plan->description ?: 'Service pricing managed from admin panel.' }}</p>
+										</div>
+									</div>
+								@else
+									@foreach ($subPrices as $row)
+										<div class="price-tbl d-flex">
+											<div class="flex-grow-1">
+												<h4 class="text-primary">{{ $row['name'] ?? $plan->name }}</h4>
+												<p>{{ $plan->name }}</p>
+											</div>
+											<div class="price-val align-self-center">
+												<h3 class="text-secondry">{{ !empty($row['price']) ? 'Rs. ' . number_format((float) $row['price'], 2) : '-' }}</h3>
+											</div>
+										</div>
+									@endforeach
+								@endif
+							@endforeach
 						</div>
-						<div class="price-tbl d-flex">
-							<div class="flex-grow-1">
-								<h4 class="text-primary">Swedish Massage</h4>
-								<p>30 â€“ 40 Minute Session  </p>
-							</div>
-							<div class="price-val align-self-center">
-								<h3 class="text-secondry">$35.00</h3>
-							</div>
-						</div>
-						<div class="price-tbl d-flex">
-							<div class="flex-grow-1">
-								<h4 class="text-primary">Deep Tissue Massage</h4>
-								<p>60 â€“ 100 Minute Session </p>
-							</div>
-							<div class="price-val align-self-center">
-								<h3 class="text-secondry">$40.00</h3>
-							</div>
-						</div>
-						<div class="price-tbl d-flex">
-							<div class="flex-grow-1">
-								<h4 class="text-primary">Therapeutic Massage</h4>
-								<p>40 â€“ 60 Minute Session</p>
-							</div>
-							<div class="price-val align-self-center">
-								<h3 class="text-secondry">$30.00</h3>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-6 col-md-12 col-sm-12">
-						<div class="price-tbl d-flex">
-							<div class="flex-grow-1">
-								<h4 class="text-primary">Hot Stone Massage</h4>
-								<p>50 â€“ 60 Minute Session </p>
-							</div>
-							<div class="price-val align-self-center">
-								<h3 class="text-secondry">$34.00</h3>
-							</div>
-						</div>
-						<div class="price-tbl d-flex">
-							<div class="flex-grow-1">
-								<h4 class="text-primary">Couples Massage</h4>
-								<p>20 â€“ 30 Minute Session  </p>
-							</div>
-							<div class="price-val  align-self-center">
-								<h3 class="text-secondry">$42.00</h3>
-							</div>
-						</div>
-						<div class="price-tbl d-flex">
-							<div class="flex-grow-1">
-								<h4 class="text-primary">Facial</h4>
-								<p>15 â€“ 30 Minute Session </p>
-							</div>
-							<div class="price-val align-self-center">
-								<h3 class="text-secondry">$38.00</h3>
-							</div>
-						</div>
-						<div class="price-tbl d-flex">
-							<div class="flex-grow-1">
-								<h4 class="text-primary">Body Waxing</h4>
-								<p>80 â€“ 100 Minute Session </p>
-							</div>
-							<div class="price-val align-self-center">
-								<h3 class="text-secondry">$65.00</h3>
-							</div>
-						</div>
-					</div>
+					@endforeach
 				</div>
 			</div>
 		</div>
@@ -601,57 +537,31 @@
 		<div class="section-full bg-white content-inner">
 			<div class="container">
 				<div class="section-head text-black text-center">
-					<h2 class="text-primary m-b10">Our Professional Team</h2>
+					<h2 class="text-primary m-b10">{{ $homeTeam?->title ?: 'Our Professional Team' }}</h2>
 					<div class="dlab-separator-outer m-b0">
 						<div class="dlab-separator text-primary style-icon"><i class="flaticon-spa text-primary"></i></div>
 					</div>
-					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the.</p>
+					<p>{{ $homeTeam?->subtitle ?: 'Meet the passionate beauty experts behind your transformation.' }}</p>
 				</div>
 				<div class="row">
-					<div class="col-lg-3 col-md-6 col-sm-6 m-b30">
-						<div class="service-box text-center">
-							<div class="service-images m-b15">
-								<img src="{{ asset('beauty_salon/images/our-team/pic1.jpg') }}" alt="">
+					@forelse ($homeTeamMembers as $member)
+							<div class="col-lg-3 col-md-6 col-sm-6 m-b30">
+								<div class="service-box text-center">
+									<div class="service-images m-b15">
+										<img src="{{ $member->image_path ? asset('storage/' . $member->image_path) : asset('beauty_salon/images/our-team/pic1.jpg') }}" alt="{{ $member->name }}">
+									</div>
+									<div class="service-content">
+										<h6 class="text-uppercase text-primary">{{ $member->name }}</h6>
+										<p class="m-b0">{{ $member->bio ?: ($member->designation ?: 'Beauty specialist') }}</p>
+									</div>
+								</div>
 							</div>
-							<div class="service-content">
-								<h6 class="text-uppercase text-primary">Ann Smith</h6>
-								<p class="m-b0">It is a long established fact that a reader will be distracted by the readable content of a page.</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 col-sm-6 m-b30">
-						<div class="service-box text-center">
-							<div class="service-images m-b15">
-								<img src="{{ asset('beauty_salon/images/our-team/pic2.jpg') }}" alt="">
-							</div>
-							<div class="service-content">
-								<h6 class="text-uppercase text-primary">Mary Lucas</h6>
-								<p class="m-b0">It is a long established fact that a reader will be distracted by the readable content of a page.</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 col-sm-6 m-b30">
-						<div class="service-box text-center">
-							<div class="service-images m-b15">
-								<img src="{{ asset('beauty_salon/images/our-team/pic3.jpg') }}" alt="">
-							</div>
-							<div class="service-content">
-								<h6 class="text-uppercase text-primary">Jennifer</h6>
-								<p class="m-b0">It is a long established fact that a reader will be distracted by the readable content of a page.</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 col-sm-6 m-b30">
-						<div class="service-box text-center">
-							<div class="service-images m-b15">
-								<img src="{{ asset('beauty_salon/images/our-team/pic4.jpg') }}" alt="">
-							</div>
-							<div class="service-content">
-								<h6 class="text-uppercase text-primary">Candice Marshall</h6>
-								<p class="m-b0">It is a long established fact that a reader will be distracted by the readable content of a page.</p>
-							</div>
-						</div>
-					</div>
+					@empty
+						<div class="col-12 text-center"><p>No team members added yet.</p></div>
+					@endforelse
+				</div>
+				<div class="text-center m-t20">
+					<a href="{{ route('beauty_salon.team') }}" class="site-button-secondry">View All Professionals</a>
 				</div>
 			</div>
 		</div>

@@ -33,8 +33,15 @@
                 <h2 class="m-b5">Hello, {{ auth()->user()->name }}</h2>
                 <p class="m-b0 text-muted">Track your bookings and manage your account.</p>
             </div>
-            <a href="{{ route('beauty_salon.booking') }}" class="site-button">New Booking</a>
+            <div style="display:flex;gap:10px;">
+                <a href="{{ route('beauty_salon.memberships') }}" class="site-button-secondry">View Membership Plans</a>
+                <a href="{{ route('beauty_salon.booking') }}" class="site-button">New Booking</a>
+            </div>
         </div>
+
+        @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
 
         <div class="row m-b20">
             <div class="col-md-4 m-b15">
@@ -84,6 +91,44 @@
                                     <td>
                                         <span class="badge badge-{{ $booking->status === 'approved' ? 'success' : ($booking->status === 'rejected' ? 'danger' : 'warning') }}">
                                             {{ ucfirst($booking->status) }}
+                                        </span>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @endif
+        </div>
+
+        <div class="panel-card p-4 m-t30">
+            <h4 class="m-b20">My Memberships</h4>
+
+            @if ($memberships->isEmpty())
+                <p class="text-muted m-b0">No memberships yet. Visit membership plans and purchase one.</p>
+            @else
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Plan</th>
+                                <th>Start Date</th>
+                                <th>Expiry Date</th>
+                                <th>Final Price</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($memberships as $membership)
+                                @php($resolvedStatus = $membership->resolved_status)
+                                <tr>
+                                    <td>{{ $membership->membershipPlan?->name ?: 'Plan' }}</td>
+                                    <td>{{ $membership->starts_at?->format('d M Y') }}</td>
+                                    <td>{{ $membership->expires_at?->format('d M Y') }}</td>
+                                    <td>Rs. {{ number_format((float) $membership->final_price, 2) }}</td>
+                                    <td>
+                                        <span class="badge badge-{{ $resolvedStatus === 'active' ? 'success' : ($resolvedStatus === 'expired' ? 'danger' : 'secondary') }}">
+                                            {{ ucfirst($resolvedStatus) }}
                                         </span>
                                     </td>
                                 </tr>

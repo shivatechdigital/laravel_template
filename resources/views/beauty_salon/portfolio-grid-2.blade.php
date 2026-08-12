@@ -30,164 +30,46 @@
 						<div class="dlab-separator-outer m-b0">
 							<div class="dlab-separator text-primary style-icon"><i class="flaticon-spa text-primary"></i></div>
 						</div>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the.</p>
-					</div>
-					<div class="site-filters style1 clearfix center">
-						<ul class="filters" data-toggle="buttons">
-							<li data-filter="" class="btn active"><input type="radio"><a href="#"><span>All</span></a></li>
-							<li data-filter="web" class="btn"><input type="radio"><a href="#"><span>Haircuts</span></a></li>
-							<li data-filter="advertising" class="btn"><input type="radio"><a href="#"><span>Coloring</span></a></li>
-							<li data-filter="branding" class="btn"><input type="radio"><a href="#"><span>Makeup</span></a></li>
-							<li data-filter="design" class="btn"><input type="radio"><a href="#"><span>Massage</span></a></li>
-							<li data-filter="photography" class="btn"><input type="radio"><a href="#"><span>Highlights</span></a></li>
-						</ul>
+						<p>Gallery images and videos are managed from admin panel and loaded dynamically.</p>
 					</div>
 					<div class="clearfix">
 						<ul id="masonry" class="dlab-gallery-listing gallery-grid-4 gallery mfp-gallery sp10">
-							<li class="web design card-container col-lg-6 col-md-6 col-sm-6 col-6">
-								<div class="dlab-box dlab-gallery-box">
-									<div class="dlab-media dlab-img-overlay1 dlab-img-effect">
-										<a href="javascript:void(0);"> <img src="{{ asset('beauty_salon/images/gallery/pic1.jpg') }}"  alt=""> </a>
-										<div class="overlay-bx">
-											<div class="overlay-icon"> 
-												<a class="mfp-link" title="Image Title Come Here" href="{{ asset('beauty_salon/images/gallery/pic1.jpg') }}"> <i class="ti-fullscreen"></i> </a>	
-											</div>
+							@forelse ($galleryItems as $item)
+								<li class="card-container col-lg-6 col-md-6 col-sm-6 col-6">
+									<div class="dlab-box dlab-gallery-box">
+										<div class="dlab-media dlab-img-overlay1 dlab-img-effect">
+											@if ($item->type === 'image' && $item->media_path)
+												<a href="javascript:void(0);"><img src="{{ asset('storage/' . $item->media_path) }}" alt="{{ $item->title }}"></a>
+												<div class="overlay-bx">
+													<div class="overlay-icon">
+														<a class="mfp-link" title="{{ $item->title }}" href="{{ asset('storage/' . $item->media_path) }}"><i class="ti-fullscreen"></i></a>
+													</div>
+												</div>
+											@else
+												@php
+													$thumb = $item->thumbnail_path ? asset('storage/' . $item->thumbnail_path) : asset('beauty_salon/images/gallery/pic1.jpg');
+												@endphp
+												<a href="javascript:void(0);"><img src="{{ $thumb }}" alt="{{ $item->title }}"></a>
+												<div class="overlay-bx">
+													<div class="overlay-icon" style="display:flex;gap:8px;align-items:center;">
+														@if ($item->video_url)
+															<a href="{{ $item->video_url }}" target="_blank" title="{{ $item->title }}"><i class="ti-control-play"></i></a>
+														@endif
+													</div>
+												</div>
+											@endif
+										</div>
+										<div style="padding:10px 0 0;">
+											<h6 style="margin:0;">{{ $item->title }}</h6>
+											@if ($item->description)
+												<p style="margin:4px 0 0;">{{ $item->description }}</p>
+											@endif
 										</div>
 									</div>
-								</div>
-							</li>
-							<li class="advertising branding photography card-container col-lg-6 col-md-6 col-sm-6 col-6">
-								<div class="dlab-box dlab-gallery-box">
-									<div class="dlab-media dlab-img-overlay1 dlab-img-effect dlab-img-effect "> 
-									<a href="javascript:void(0);"> <img src="{{ asset('beauty_salon/images/gallery/pic2.jpg') }}"  alt=""> </a>
-										<div class="overlay-bx">
-											<div class="overlay-icon"> 
-												<a class="mfp-link" title="Image Title Come Here" href="{{ asset('beauty_salon/images/gallery/pic2.jpg') }}"> <i class="ti-fullscreen"></i> </a>	
-											</div>
-										</div>
-									</div>
-								</div>
-							</li>
-							<li class="branding design photography card-container col-lg-6 col-md-6 col-sm-6 col-6">
-								<div class="dlab-box dlab-gallery-box">
-									<div class="dlab-media dlab-img-overlay1 dlab-img-effect"> 
-									<a href="javascript:void(0);"> <img src="{{ asset('beauty_salon/images/gallery/pic3.jpg') }}"  alt=""> </a>
-										<div class="overlay-bx">
-											<div class="overlay-icon"> 
-												<a class="mfp-link" title="Image Title Come Here" href="{{ asset('beauty_salon/images/gallery/pic3.jpg') }}"> <i class="ti-fullscreen"></i> </a>	
-											</div>
-										</div>
-									</div>
-								</div>
-							</li>
-							<li class="web design card-container col-lg-6 col-md-6 col-sm-6 col-6">
-								<div class="dlab-box dlab-gallery-box">
-									<div class="dlab-media dlab-img-overlay1 dlab-img-effect"> 
-									<a href="javascript:void(0);"> <img src="{{ asset('beauty_salon/images/gallery/pic4.jpg') }}"  alt=""> </a>
-										<div class="overlay-bx">
-											<div class="overlay-icon"> 
-												<a class="mfp-link" title="Image Title Come Here" href="{{ asset('beauty_salon/images/gallery/pic4.jpg') }}"> <i class="ti-fullscreen"></i> </a>	
-											</div>
-										</div>
-									</div>
-								</div>
-							</li>
-							 <li class="web branding card-container col-lg-6 col-md-6 col-sm-6 col-6">
-								<div class="dlab-box dlab-gallery-box">
-									<div class="dlab-media dlab-img-overlay1 dlab-img-effect">
-									<a href="javascript:void(0);"> <img src="{{ asset('beauty_salon/images/gallery/pic5.jpg') }}"  alt=""> </a>
-										<div class="overlay-bx">
-											<div class="overlay-icon"> 
-												<a class="mfp-link" title="Image Title Come Here" href="{{ asset('beauty_salon/images/gallery/pic5.jpg') }}"> <i class="ti-fullscreen"></i> </a>	
-											</div>
-										</div>
-									</div>
-								</div>
-							</li>
-							<li class="advertising design photography card-container col-lg-6 col-md-6 col-sm-6 col-6">
-								<div class="dlab-box dlab-gallery-box">
-									<div class="dlab-media dlab-img-overlay1 dlab-img-effect ">
-									<a href="javascript:void(0);"> <img src="{{ asset('beauty_salon/images/gallery/pic6.jpg') }}"  alt=""> </a>
-										<div class="overlay-bx">
-											<div class="overlay-icon"> 
-												<a class="mfp-link" title="Image Title Come Here" href="{{ asset('beauty_salon/images/gallery/pic6.jpg') }}"> <i class="ti-fullscreen"></i> </a>	
-											</div>
-										</div>
-									</div>
-								</div>
-							</li>
-							<li class="web branding card-container col-lg-6 col-md-6 col-sm-6 col-6">
-								<div class="dlab-box dlab-gallery-box">
-									<div class="dlab-media dlab-img-overlay1 dlab-img-effect">
-										<a href="javascript:void(0);"> <img src="{{ asset('beauty_salon/images/gallery/pic7.jpg') }}"  alt=""> </a>
-										<div class="overlay-bx">
-											<div class="overlay-icon"> 
-												<a class="mfp-link" title="Image Title Come Here" href="{{ asset('beauty_salon/images/gallery/pic7.jpg') }}"> <i class="ti-fullscreen"></i> </a>	
-											</div>
-										</div>
-									</div>
-								</div>
-							</li>
-							<li class="advertising design photography card-container col-lg-6 col-md-6 col-sm-6 col-6">
-								<div class="dlab-box dlab-gallery-box">
-									<div class="dlab-media dlab-img-overlay1 dlab-img-effect dlab-img-effect "> 
-									<a href="javascript:void(0);"> <img src="{{ asset('beauty_salon/images/gallery/pic8.jpg') }}"  alt=""> </a>
-										<div class="overlay-bx">
-											<div class="overlay-icon"> 
-												<a class="mfp-link" title="Image Title Come Here" href="{{ asset('beauty_salon/images/gallery/pic8.jpg') }}"> <i class="ti-fullscreen"></i> </a>	
-											</div>
-										</div>
-									</div>
-								</div>
-							</li>
-							<li class="web photography card-container col-lg-6 col-md-6 col-sm-6 col-6">
-								<div class="dlab-box dlab-gallery-box">
-									<div class="dlab-media dlab-img-overlay1 dlab-img-effect"> 
-									<a href="javascript:void(0);"> <img src="{{ asset('beauty_salon/images/gallery/pic9.jpg') }}"  alt=""> </a>
-										<div class="overlay-bx">
-											<div class="overlay-icon"> 
-												<a class="mfp-link" title="Image Title Come Here" href="{{ asset('beauty_salon/images/gallery/pic9.jpg') }}"> <i class="ti-fullscreen"></i> </a>	
-											</div>
-										</div>
-									</div>
-								</div>
-							</li>
-							<li class="advertising branding card-container col-lg-6 col-md-6 col-sm-6 col-6">
-								<div class="dlab-box dlab-gallery-box">
-									<div class="dlab-media dlab-img-overlay1 dlab-img-effect"> 
-									<a href="javascript:void(0);"> <img src="{{ asset('beauty_salon/images/gallery/pic1.jpg') }}"  alt=""> </a>
-										<div class="overlay-bx">
-											<div class="overlay-icon"> 
-												<a class="mfp-link" title="Image Title Come Here" href="{{ asset('beauty_salon/images/gallery/pic1.jpg') }}"> <i class="ti-fullscreen"></i> </a>	
-											</div>
-										</div>
-									</div>
-								</div>
-							</li>
-							 <li class="web design card-container col-lg-6 col-md-6 col-sm-6 col-6">
-								<div class="dlab-box dlab-gallery-box">
-									<div class="dlab-media dlab-img-overlay1 dlab-img-effect">
-									<a href="javascript:void(0);"> <img src="{{ asset('beauty_salon/images/gallery/pic2.jpg') }}"  alt=""> </a>
-										<div class="overlay-bx">
-											<div class="overlay-icon"> 
-												<a class="mfp-link" title="Image Title Come Here" href="{{ asset('beauty_salon/images/gallery/pic2.jpg') }}"> <i class="ti-fullscreen"></i> </a>	
-											</div>
-										</div>
-									</div>
-								</div>
-							</li>
-							<li class="advertising branding photography card-container col-lg-6 col-md-6 col-sm-6 col-6">
-								<div class="dlab-box dlab-gallery-box">
-									<div class="dlab-media dlab-img-overlay1 dlab-img-effect ">
-									<a href="javascript:void(0);"> <img src="{{ asset('beauty_salon/images/gallery/pic3.jpg') }}"  alt=""> </a>
-										<div class="overlay-bx">
-											<div class="overlay-icon"> 
-												<a class="mfp-link" title="Image Title Come Here" href="{{ asset('beauty_salon/images/gallery/pic3.jpg') }}"> <i class="ti-fullscreen"></i> </a>	
-											</div>
-										</div>
-									</div>
-								</div>
-							</li>
+								</li>
+							@empty
+								<li class="col-12"><p class="text-center">No gallery items added yet.</p></li>
+							@endforelse
 						</ul>
 					</div>
 				</div>

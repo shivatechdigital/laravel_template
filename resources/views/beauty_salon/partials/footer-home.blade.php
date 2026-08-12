@@ -72,11 +72,7 @@
 								</form>
 							</div>
 							<ul class="list-inline m-a0">
-								<li><a target="_blank" href="https://www.facebook.com/" class="site-button facebook circle "><i class="fa fa-facebook"></i></a></li>
-								<li><a target="_blank" href="https://www.google.com/" class="site-button google-plus circle "><i class="fa fa-google-plus"></i></a></li>
-								<li><a target="_blank" href="https://www.linkedin.com/" class="site-button linkedin circle "><i class="fa fa-linkedin"></i></a></li>
-								<li><a target="_blank" href="https://www.instagram.com/" class="site-button instagram circle "><i class="fa fa-instagram"></i></a></li>
-								<li><a target="_blank" href="https://twitter.com/" class="site-button twitter circle "><i class="fa fa-twitter"></i></a></li>
+								@include('beauty_salon.partials.social-links', ['mode' => 'footer'])
 							</ul>
                         </div>
                     </div>

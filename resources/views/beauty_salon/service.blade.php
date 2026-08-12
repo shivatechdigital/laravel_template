@@ -22,7 +22,6 @@
         </div>
         <!-- inner page banner END -->
 		<div class="content-block">
-			<!-- About Us -->
 			<div class="section-full content-inner-2 bg-white hair-services">
 				<div class="container">
 					<div class="section-head text-black text-center">
@@ -30,277 +29,91 @@
 						<div class="dlab-separator-outer m-b0">
 							<div class="dlab-separator text-primary style-icon"><i class="flaticon-spa text-primary"></i></div>
 						</div>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the.</p>
+						<p>All services below are managed from admin panel and update instantly on this page.</p>
 					</div>
 					<div class="row">
-						<div class="col-lg-4 col-md-6 col-sm-6 p-lr0">
-							<div class="icon-bx-wraper center p-a30">
-								<div class="icon-lg radius m-b20"> <a href="{{ route('beauty_salon.services-details') }}" class="icon-cell"><i class="flaticon-barbershop"></i></a> </div>
-								<div class="icon-content">
-									<h5 class="dez-tilte"><a href="{{ route('beauty_salon.services-details') }}">Haircut & Styling</a></h5>
-									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</p>
+						@forelse ($services as $service)
+							<div class="col-lg-4 col-md-6 col-sm-6 p-lr0">
+								<div class="icon-bx-wraper center p-a30" style="min-height: 320px;">
+									@if ($service->image_path)
+										<div class="m-b15"><img src="{{ asset('storage/' . $service->image_path) }}" alt="{{ $service->title }}" style="width:100%;max-height:160px;object-fit:cover;border-radius:12px;"></div>
+									@endif
+									<div class="icon-content">
+										<h5 class="dez-tilte">{{ $service->title }}</h5>
+										@if ($service->description)
+											<p>{{ $service->description }}</p>
+										@endif
+										@if ($service->price || $service->duration_minutes)
+											<p class="m-b0">
+												@if ($service->price)
+													<strong>Rs. {{ number_format((float) $service->price, 2) }}</strong>
+												@endif
+												@if ($service->price && $service->duration_minutes)
+													<span> | </span>
+												@endif
+												@if ($service->duration_minutes)
+													<span>{{ $service->duration_minutes }} min</span>
+												@endif
+											</p>
+										@endif
+										@if (!empty($service->sub_services))
+											<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;">
+												@foreach ($service->sub_services as $subService)
+													<span style="background:#eef2f7;padding:6px 10px;border-radius:999px;font-size:13px;line-height:1;">{{ $subService }}</span>
+												@endforeach
+											</div>
+										@endif
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-6 p-lr0">
-							<div class="icon-bx-wraper center p-a30">
-								<div class="icon-lg radius m-b20"> <a href="{{ route('beauty_salon.services-details') }}" class="icon-cell"><i class="flaticon-makeup"></i></a> </div>
-								<div class="icon-content">
-									<h5 class="dez-tilte"><a href="{{ route('beauty_salon.services-details') }}">Makeup</a></h5>
-									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</p>
-								</div>
+						@empty
+							<div class="col-12 text-center">
+								<p>No services added yet. Admin panel se services add karo.</p>
 							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-6 p-lr0">
-							<div class="icon-bx-wraper center p-a30">
-								<div class="icon-lg radius m-b20"> <a href="{{ route('beauty_salon.services-details') }}" class="icon-cell"><i class="flaticon-makeup-1"></i></a> </div>
-								<div class="icon-content">
-									<h5 class="dez-tilte"><a href="{{ route('beauty_salon.services-details') }}">Manicure & Pedicure</a></h5>
-									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-6 p-lr0">
-							<div class="icon-bx-wraper center p-a30">
-								<div class="icon-lg radius m-b20"> <a href="{{ route('beauty_salon.services-details') }}" class="icon-cell"><i class="flaticon-woman-1"></i></a> </div>
-								<div class="icon-content">
-									<h5 class="dez-tilte"><a href="{{ route('beauty_salon.services-details') }}">Skin Care</a></h5>
-									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-6 p-lr0">
-							<div class="icon-bx-wraper center p-a30">
-								<div class="icon-lg radius m-b20"> <a href="{{ route('beauty_salon.services-details') }}" class="icon-cell"><i class="flaticon-woman"></i></a> </div>
-								<div class="icon-content">
-									<h5 class="dez-tilte"><a href="{{ route('beauty_salon.services-details') }}">Body Treatment</a></h5>
-									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 col-sm-6 p-lr0">
-							<div class="icon-bx-wraper center p-a30">
-								<div class="icon-lg radius m-b20"> <a href="{{ route('beauty_salon.services-details') }}" class="icon-cell"><i class="flaticon-candle-1"></i></a> </div>
-								<div class="icon-content">
-									<h5 class="dez-tilte"><a href="{{ route('beauty_salon.services-details') }}">Massage</a></h5>
-									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</p>
-								</div>
-							</div>
-						</div>
+						@endforelse
 					</div>
 				</div>
 			</div>
-			<!-- About Us -->
+
 			<div class="section-full content-inner-3 services-box bg-pink-light" style="background-image:url({{ asset('beauty_salon/images/background/bg5.jpg') }}); background-position: bottom; background-size: 100%; background-repeat: no-repeat;">
-                <div class="container">
-					<div class="row">
-						<div class="col-lg-3 col-md-6 col-sm-6 m-b30">
-							<div class="icon-bx-wraper p-lr15 p-b30 p-t20 bg-white center fly-box-ho">
-								<div class="icon-lg m-b10"> <span class="icon-cell text-primary"><i class="flaticon-woman"></i></span> </div>
-								<div class="icon-content">
-									<h6 class="dlab-tilte">We are Professional</h6>
-									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-									<a href="{{ route('beauty_salon.services-details') }}" class="site-button-secondry">Read More</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6 m-b30">
-							<div class="icon-bx-wraper p-lr15 p-b30 p-t20 bg-white center fly-box-ho">
-								<div class="icon-lg m-b10"><span class="icon-cell text-primary"><i class="flaticon-mortar"></i></span> </div>
-								<div class="icon-content">
-									<h6 class="dlab-tilte">Lux Cosmetic</h6>
-									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-									<a href="{{ route('beauty_salon.services-details') }}" class="site-button-secondry">Read More</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6 m-b30">
-							<div class="icon-bx-wraper p-lr15 p-b30 p-t20 bg-white center fly-box-ho">
-								<div class="icon-lg m-b10"> <span class="icon-cell text-primary"><i class="flaticon-candle"></i></span> </div>
-								<div class="icon-content">
-									<h6 class="dlab-tilte">Medical Education</h6>
-									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-									<a href="{{ route('beauty_salon.services-details') }}" class="site-button-secondry">Read More</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6 m-b10">
-							<div class="icon-bx-wraper p-lr15 p-b30 p-t20 bg-white center fly-box-ho">
-								<div class="icon-lg m-b10"> <span class="icon-cell text-primary"><i class="flaticon-sauna-1"></i></span> </div>
-								<div class="icon-content">
-									<h6 class="dlab-tilte">The Newest Equipment</h6>
-									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-									<a href="{{ route('beauty_salon.services-details') }}" class="site-button-secondry">Read More</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-            </div>
-			<!-- Our Professional Team -->
-			<div class="section-full content-inner-2 overlay-white-middle" style="background-image:url({{ asset('beauty_salon/images/background/bg1.png') }}), url({{ asset('beauty_salon/images/background/bg2.png') }}); background-position: bottom, top; background-size: 100%; background-repeat: no-repeat;">
 				<div class="container">
 					<div class="section-head text-black text-center">
-						<h2 class="text-primary m-b10">Our Professional Team</h2>
+						<h2 class="text-primary m-b10">Pricing Plans</h2>
 						<div class="dlab-separator-outer m-b0">
 							<div class="dlab-separator text-primary style-icon"><i class="flaticon-spa text-primary"></i></div>
 						</div>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the.</p>
+						<p>Plans are also controlled dynamically from admin panel.</p>
 					</div>
-					<div class="team-carousel owl-carousel owl-carousel owl-btn-center-lr owl-btn-3 owl-theme owl-dots-primary-full owl-loaded owl-drag">
-						<div class="item">
-							<div class="dlab-box text-center team-box">
-								<div class="dlab-media"> <img width="300" height="300" src="{{ asset('beauty_salon/images/our-team/pic1.jpg') }}" alt=""></div>
-								<div class="dlab-title-bx p-a10">
-									<h5 class="text-black m-a0">Charlotte</h5>
-									<span class="clearfix">Make Up Artist</span>
+					<div class="row">
+						@forelse ($plans as $plan)
+							<div class="col-lg-4 col-md-6 m-b30">
+								<div class="icon-bx-wraper p-lr20 p-b30 p-t20 bg-white center fly-box-ho" style="min-height:330px;">
+									<div class="icon-content">
+										<h6 class="dlab-tilte">{{ $plan->name }}</h6>
+										@if ($plan->description)
+											<p class="m-b5">{{ $plan->description }}</p>
+										@endif
+										@if (!empty($plan->sub_service_prices))
+											<ul style="text-align:left; padding-left:18px; margin:0;">
+												@foreach ($plan->sub_service_prices as $item)
+													<li>
+														<strong>{{ $item['name'] ?? 'Sub Service' }}</strong>
+														@if (!empty($item['price']))
+															- Rs. {{ number_format((float) $item['price'], 2) }}
+														@endif
+													</li>
+												@endforeach
+											</ul>
+										@endif
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="item">
-							<div class="dlab-box text-center team-box">
-								<div class="dlab-media"> <img width="300" height="300" src="{{ asset('beauty_salon/images/our-team/pic2.jpg') }}" alt=""></div>
-								<div class="dlab-title-bx p-a10">
-									<h5 class="text-black m-a0">Jennifer</h5>
-									<span class="clearfix">Cosmetologist</span>
-								</div>
-							</div>
-						</div>	
-						<div class="item">
-							<div class="dlab-box text-center team-box">
-								<div class="dlab-media"> <img width="300" height="300" src="{{ asset('beauty_salon/images/our-team/pic3.jpg') }}" alt=""></div>
-								<div class="dlab-title-bx p-a10">
-									<h5 class="text-black m-a0">Roxie Burton</h5>
-									<span class="clearfix">Make Up Artist</span>
-								</div>
-							</div>
-						</div>	
-						<div class="item">
-							<div class="dlab-box text-center team-box">
-								<div class="dlab-media"> <img width="300" height="300" src="{{ asset('beauty_salon/images/our-team/pic5.jpg') }}" alt=""></div>
-								<div class="dlab-title-bx p-a10">
-									<h5 class="text-black m-a0">Evelyn Martinez</h5>
-									<span class="clearfix">Fashion Designer</span>
-								</div>
-							</div>
-						</div>	
-						<div class="item">
-							<div class="dlab-box text-center team-box">
-								<div class="dlab-media"> <img width="300" height="300" src="{{ asset('beauty_salon/images/our-team/pic4.jpg') }}" alt=""></div>
-								<div class="dlab-title-bx p-a10">
-									<h5 class="text-black m-a0">Diane Mateo</h5>
-									<span class="clearfix">Fashion Designer</span>
-								</div>
-							</div>
-						</div>	
+						@empty
+							<div class="col-12 text-center"><p>No pricing plan available yet.</p></div>
+						@endforelse
 					</div>
 				</div>
 			</div>
-			<!-- Our Professional Team End -->
-			<div class="section-full video-presentation overlay-black-dark bg-img-fix"  style="background-image:url({{ asset('beauty_salon/images/background/bg1.jpg') }});">
-                <div class="container">
-					<div class="row">
-						<div class="col-lg-12 col-md-12 text-white text-center">
-							<h2>Video Presentation </h2>
-							<p class="max-w700 m-auto">In this video, our staff members tell about their work at Solari, how they achieve the best results for their clients every day and more. Click the Play button below to watch this presentation.</p>
-							<div class="video-play-icon m-t50">
-								<a href="https://www.youtube.com/watch?v=rICXf0UH7Cg" class="popup-youtube video"><i class="ti-control-play"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
-            </div>
-			<!-- Get in touch -->
-			<!-- Our Portfolio -->
-			<div class="section-full content-inner overlay-white-middle" style="background-image:url({{ asset('beauty_salon/images/background/bg1.png') }}), url({{ asset('beauty_salon/images/background/bg2.png') }}); background-position: bottom, top; background-size: 100%; background-repeat: no-repeat;">
-                <div class="container">
-					<div class="section-head text-black text-center">
-						<h2 class="text-primary m-b10">Our Latest Blog</h2>
-						<div class="dlab-separator-outer m-b0">
-							<div class="dlab-separator text-primary style-icon"><i class="flaticon-spa text-primary"></i></div>
-						</div>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the.</p>
-					</div>
-					<div class="blog-carousel owl-carousel owl-btn-center-lr owl-btn-3 owl-theme owl-btn-center-lr owl-btn-1">
-						<div class="item">
-							<div class="blog-post blog-grid blog-style-1">
-								<div class="dlab-post-media dlab-img-effect radius-sm"> <a href="{{ route('beauty_salon.blog-details') }}"><img width="700" height="500" src="{{ asset('beauty_salon/images/blog/grid/pic4.jpg') }}" alt=""></a> </div>
-								<div class="dlab-info">
-									 <div class="dlab-post-meta">
-										<ul class="d-flex align-items-center">
-											<li class="post-date">September 18, 2021</li>
-											<li class="post-comment"><a href="{{ route('beauty_salon.blog-details') }}">5k</a> </li>
-										</ul>
-									</div>
-									<div class="dlab-post-title ">
-										<h5 class="post-title font-20"><a href="{{ route('beauty_salon.blog-details') }}">Spring is in the Air and and So Our These Amazing Spa Offers</a></h5>
-									</div>
-									<div class="dlab-post-readmore blog-share"> 
-										<a href="{{ route('beauty_salon.blog-details') }}" title="READ MORE" rel="bookmark" class="site-button-link border-link black">READ MORE</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="blog-post blog-grid blog-style-1">
-								<div class="dlab-post-media dlab-img-effect radius-sm"> <a href="{{ route('beauty_salon.blog-details') }}"><img width="700" height="500" src="{{ asset('beauty_salon/images/blog/grid/pic3.jpg') }}" alt=""></a> </div>
-								<div class="dlab-info">
-									 <div class="dlab-post-meta">
-										<ul class="d-flex align-items-center">
-											<li class="post-date">September 18, 2021</li>
-											<li class="post-comment"><a href="{{ route('beauty_salon.blog-details') }}">5k</a> </li>
-										</ul>
-									</div>
-									<div class="dlab-post-title ">
-										<h5 class="post-title font-20"><a href="{{ route('beauty_salon.blog-details') }}">Spring is in the Air and and So Our These Amazing Spa Offers</a></h5>
-									</div>
-									<div class="dlab-post-readmore blog-share"> 
-										<a href="{{ route('beauty_salon.blog-details') }}" title="READ MORE" rel="bookmark" class="site-button-link border-link black">READ MORE</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="blog-post blog-grid blog-style-1">
-								<div class="dlab-post-media dlab-img-effect radius-sm"> <a href="{{ route('beauty_salon.blog-details') }}"><img width="700" height="500" src="{{ asset('beauty_salon/images/blog/grid/pic2.jpg') }}" alt=""></a> </div>
-								<div class="dlab-info">
-									 <div class="dlab-post-meta">
-										<ul class="d-flex align-items-center">
-											<li class="post-date">September 18, 2021</li>
-											<li class="post-comment"><a href="{{ route('beauty_salon.blog-details') }}">5k</a> </li>
-										</ul>
-									</div>
-									<div class="dlab-post-title ">
-										<h5 class="post-title font-20"><a href="{{ route('beauty_salon.blog-details') }}">Spring is in the Air and and So Our These Amazing Spa Offers</a></h5>
-									</div>
-									<div class="dlab-post-readmore blog-share"> 
-										<a href="{{ route('beauty_salon.blog-details') }}" title="READ MORE" rel="bookmark" class="site-button-link border-link black">READ MORE</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="blog-post blog-grid blog-style-1">
-								<div class="dlab-post-media dlab-img-effect radius-sm"> <a href="{{ route('beauty_salon.blog-details') }}"><img width="700" height="500" src="{{ asset('beauty_salon/images/blog/grid/pic1.jpg') }}" alt=""></a> </div>
-								<div class="dlab-info">
-									 <div class="dlab-post-meta">
-										<ul class="d-flex align-items-center">
-											<li class="post-date">September 18, 2021</li>
-											<li class="post-comment"><a href="{{ route('beauty_salon.blog-details') }}">5k</a> </li>
-										</ul>
-									</div>
-									<div class="dlab-post-title ">
-										<h5 class="post-title font-20"><a href="{{ route('beauty_salon.blog-details') }}">Spring is in the Air and and So Our These Amazing Spa Offers</a></h5>
-									</div>
-									<div class="dlab-post-readmore blog-share"> 
-										<a href="{{ route('beauty_salon.blog-details') }}" title="READ MORE" rel="bookmark" class="site-button-link border-link black">READ MORE</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-            </div>
         <!-- contact area END -->
         </div>
 		<!-- contact area END -->

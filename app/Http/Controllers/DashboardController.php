@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\UserMembership;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -29,8 +30,15 @@ class DashboardController extends Controller
             ->latest('appointment_time')
             ->get();
 
+        $memberships = UserMembership::query()
+            ->with('membershipPlan:id,name,expiry_days')
+            ->where('user_id', $request->user()->id)
+            ->latest('starts_at')
+            ->get();
+
         return view('dashboard.user', [
             'bookings' => $bookings,
+            'memberships' => $memberships,
         ]);
     }
 

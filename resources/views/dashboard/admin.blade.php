@@ -210,6 +210,16 @@
             <div class="brand"><span class="pill"></span> BeautyZone</div>
             <nav class="nav">
                 <a class="active" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                <a href="{{ route('admin.services.index') }}">Manage Services</a>
+                <a href="{{ route('admin.pricing.index') }}">Manage Pricing</a>
+                <a href="{{ route('admin.memberships.index') }}">Manage Memberships</a>
+                <a href="{{ route('admin.billing.create') }}">Create Bill</a>
+                <a href="{{ route('admin.billing.index') }}">Billing History</a>
+                <a href="{{ route('admin.gallery.index') }}">Manage Gallery</a>
+                <a href="{{ route('admin.team-members.index') }}">Manage Team Members</a>
+                <a href="{{ route('admin.social-links.index') }}">Manage Social Links</a>
+                <a href="{{ route('admin.content-blocks.index') }}">Manage Content Blocks</a>
+                <a href="{{ route('admin.pages.index') }}">Edit Page Templates</a>
                 <a href="{{ route('beauty_salon.booking') }}">Create Booking</a>
                 <a href="{{ route('beauty_salon.index') }}">Visit Website</a>
             </nav>
@@ -308,6 +318,10 @@
                 <div class="panel">
                     <h4>Quick Highlights</h4>
                     <ul class="quick-list">
+                        <li>
+                            <strong>Content Management</strong>
+                            <div class="meta"><a href="{{ route('admin.services.index') }}">Services</a> | <a href="{{ route('admin.pricing.index') }}">Pricing</a> | <a href="{{ route('admin.memberships.index') }}">Memberships</a> | <a href="{{ route('admin.billing.create') }}">Create Bill</a> | <a href="{{ route('admin.billing.index') }}">Billing History</a> | <a href="{{ route('admin.gallery.index') }}">Gallery</a> | <a href="{{ route('admin.team-members.index') }}">Team</a> | <a href="{{ route('admin.social-links.index') }}">Social Links</a> | <a href="{{ route('admin.content-blocks.index') }}">Content Blocks</a></div>
+                        </li>
                         <li>
                             <strong>Pending Queue</strong>
                             <div class="meta">{{ $pendingBookings }} booking requests need review.</div>

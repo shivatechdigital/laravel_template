@@ -163,12 +163,7 @@
 							<div class="share-details-btn">
 								<ul>
 									<li><h5 class="m-a0">Share Post</h5></li>
-									<li><a target="_blank" href="https://www.facebook.com/" class="site-button facebook button-sm"><i class="fa fa-facebook"></i> Facebook</a></li>
-									<li><a target="_blank" href="https://www.google.com/" class="site-button google-plus button-sm"><i class="fa fa-google-plus"></i> Google Plus</a></li>
-									<li><a target="_blank" href="https://www.linkedin.com/" class="site-button linkedin button-sm"><i class="fa fa-linkedin"></i> Linkedin</a></li>
-									<li><a target="_blank" href="https://www.instagram.com/" class="site-button instagram button-sm"><i class="fa fa-instagram"></i> Instagram</a></li>
-									<li><a target="_blank" href="https://twitter.com/" class="site-button twitter button-sm"><i class="fa fa-twitter"></i> Twitter</a></li>
-									<li><a target="_blank" href="https://www.youtube.com/" class="site-button youtube button-sm"><i class="fa fa-youtube-play"></i> Youtube</a></li>
+                                    @include('beauty_salon.partials.social-links', ['mode' => 'share'])
 								</ul>
 							</div>
 							
@@ -183,10 +178,7 @@
 										<p class="author-title">Licensed Massage Therapist & Wellness Expert</p>
 										<p>Dr. Emma Williams has over 15 years of experience in massage therapy and wellness. She specializes in therapeutic massage techniques and has helped thousands of clients achieve better health and relaxation.</p>
 										<div class="author-social">
-											<a href="javascript:void(0);"><i class="fa fa-facebook"></i></a>
-											<a href="javascript:void(0);"><i class="fa fa-twitter"></i></a>
-											<a href="javascript:void(0);"><i class="fa fa-linkedin"></i></a>
-											<a href="javascript:void(0);"><i class="fa fa-instagram"></i></a>
+                                            @include('beauty_salon.partials.social-links', ['mode' => 'author'])
 										</div>
 									</div>
 								</div>

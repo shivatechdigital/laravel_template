@@ -23,168 +23,31 @@
         <!-- inner page banner END -->
         <!-- contact area -->
         <div class="content-block">
-			<!-- Our Professional Team -->
-			<div class="section-full content-inner-2 overlay-white-middle" style="background-image:url({{ asset('beauty_salon/images/background/bg1.png') }}), url({{ asset('beauty_salon/images/background/bg2.png') }}); background-position: bottom, top; background-size: 100%; background-repeat: no-repeat;">
-				<div class="container">
-					<div class="section-head text-black text-center">
-						<h2 class="text-primary m-b10">Our Professional Team</h2>
-						<div class="dlab-separator-outer m-b0">
-							<div class="dlab-separator text-primary style-icon"><i class="flaticon-spa text-primary"></i></div>
-						</div>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the.</p>
-					</div>
-					<div class="team-carousel owl-carousel owl-carousel owl-btn-center-lr owl-btn-3 owl-theme owl-dots-primary-full owl-loaded owl-drag">
-						<div class="item">
-							<div class="dlab-box text-center team-box">
-								<div class="dlab-media"> <img width="300" height="300" src="{{ asset('beauty_salon/images/our-team/pic1.jpg') }}" alt=""></div>
-								<div class="dlab-title-bx p-a10">
-									<h5 class="text-black m-a0">Charlotte</h5>
-									<span class="clearfix">Make Up Artist</span>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="dlab-box text-center team-box">
-								<div class="dlab-media"> <img width="300" height="300" src="{{ asset('beauty_salon/images/our-team/pic2.jpg') }}" alt=""></div>
-								<div class="dlab-title-bx p-a10">
-									<h5 class="text-black m-a0">Jennifer</h5>
-									<span class="clearfix">Cosmetologist</span>
-								</div>
-							</div>
-						</div>	
-						<div class="item">
-							<div class="dlab-box text-center team-box">
-								<div class="dlab-media"> <img width="300" height="300" src="{{ asset('beauty_salon/images/our-team/pic3.jpg') }}" alt=""></div>
-								<div class="dlab-title-bx p-a10">
-									<h5 class="text-black m-a0">Roxie Burton</h5>
-									<span class="clearfix">Make Up Artist</span>
-								</div>
-							</div>
-						</div>	
-						<div class="item">
-							<div class="dlab-box text-center team-box">
-								<div class="dlab-media"> <img width="300" height="300" src="{{ asset('beauty_salon/images/our-team/pic5.jpg') }}" alt=""></div>
-								<div class="dlab-title-bx p-a10">
-									<h5 class="text-black m-a0">Evelyn Martinez</h5>
-									<span class="clearfix">Fashion Designer</span>
-								</div>
-							</div>
-						</div>	
-						<div class="item">
-							<div class="dlab-box text-center team-box">
-								<div class="dlab-media"> <img width="300" height="300" src="{{ asset('beauty_salon/images/our-team/pic4.jpg') }}" alt=""></div>
-								<div class="dlab-title-bx p-a10">
-									<h5 class="text-black m-a0">Diane Mateo</h5>
-									<span class="clearfix">Fashion Designer</span>
-								</div>
-							</div>
-						</div>	
-					</div>
-				</div>
-			</div>
-			<!-- Our Professional Team End -->
-			<!-- Our Services -->
-			<div class="section-full content-inner-3 services-box bg-pink-light" style="background-image:url({{ asset('beauty_salon/images/background/bg5.jpg') }}); background-position: bottom; background-size: 100%; background-repeat: no-repeat;">
-                <div class="container">
-					<div class="row">
-						<div class="col-lg-3 col-md-6 col-sm-6 m-b30">
-							<div class="icon-bx-wraper p-lr15 p-b30 p-t20 bg-white center fly-box-ho">
-								<div class="icon-lg m-b10"> <span class="icon-cell text-primary"><i class="flaticon-woman"></i></span> </div>
-								<div class="icon-content">
-									<h6 class="dlab-tilte">We are Professional</h6>
-									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-									<a href="{{ route('beauty_salon.services-details') }}" class="site-button-secondry">Read More</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6 m-b30">
-							<div class="icon-bx-wraper p-lr15 p-b30 p-t20 bg-white center fly-box-ho">
-								<div class="icon-lg m-b10"><span class="icon-cell text-primary"><i class="flaticon-mortar"></i></span> </div>
-								<div class="icon-content">
-									<h6 class="dlab-tilte">Lux Cosmetic</h6>
-									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-									<a href="{{ route('beauty_salon.services-details') }}" class="site-button-secondry">Read More</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6 m-b30">
-							<div class="icon-bx-wraper p-lr15 p-b30 p-t20 bg-white center fly-box-ho">
-								<div class="icon-lg m-b10"> <span class="icon-cell text-primary"><i class="flaticon-candle"></i></span> </div>
-								<div class="icon-content">
-									<h6 class="dlab-tilte">Medical Education</h6>
-									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-									<a href="{{ route('beauty_salon.services-details') }}" class="site-button-secondry">Read More</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6 m-b10">
-							<div class="icon-bx-wraper p-lr15 p-b30 p-t20 bg-white center fly-box-ho">
-								<div class="icon-lg m-b10"> <span class="icon-cell text-primary"><i class="flaticon-sauna-1"></i></span> </div>
-								<div class="icon-content">
-									<h6 class="dlab-tilte">The Newest Equipment</h6>
-									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-									<a href="{{ route('beauty_salon.services-details') }}" class="site-button-secondry">Read More</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-            </div>
-            <!-- Our Services -->
 			<div class="section-full bg-white content-inner">
 				<div class="container">
 					<div class="section-head text-black text-center">
-						<h2 class="text-primary m-b10">Our Professional Team</h2>
+						<h2 class="text-primary m-b10">All Professionals</h2>
 						<div class="dlab-separator-outer m-b0">
 							<div class="dlab-separator text-primary style-icon"><i class="flaticon-spa text-primary"></i></div>
 						</div>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the.</p>
+						<p>Meet all experts from our salon team.</p>
 					</div>
 					<div class="row">
-						<div class="col-lg-3 col-md-6 col-sm-6 m-b30">
-							<div class="service-box text-center">
-								<div class="service-images m-b15">
-									<img src="{{ asset('beauty_salon/images/our-team/pic1.jpg') }}" alt="">
-								</div>
-								<div class="service-content">
-									<h6 class="text-uppercase text-primary">Ann Smith</h6>
-									<p class="m-b0">It is a long established fact that a reader will be distracted by the readable content of a page.</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6 m-b30">
-							<div class="service-box text-center">
-								<div class="service-images m-b15">
-									<img src="{{ asset('beauty_salon/images/our-team/pic2.jpg') }}" alt="">
-								</div>
-								<div class="service-content">
-									<h6 class="text-uppercase text-primary">Mary Lucas</h6>
-									<p class="m-b0">It is a long established fact that a reader will be distracted by the readable content of a page.</p>
+						@forelse ($teamMembers as $member)
+							<div class="col-lg-3 col-md-6 col-sm-6 m-b30">
+								<div class="service-box text-center">
+									<div class="service-images m-b15">
+										<img src="{{ $member->image_path ? asset('storage/' . $member->image_path) : asset('beauty_salon/images/our-team/pic1.jpg') }}" alt="{{ $member->name }}">
+									</div>
+									<div class="service-content">
+										<h6 class="text-uppercase text-primary">{{ $member->name }}</h6>
+										<p class="m-b0">{{ $member->bio ?: ($member->designation ?: 'Beauty specialist') }}</p>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6 m-b30">
-							<div class="service-box text-center">
-								<div class="service-images m-b15">
-									<img src="{{ asset('beauty_salon/images/our-team/pic3.jpg') }}" alt="">
-								</div>
-								<div class="service-content">
-									<h6 class="text-uppercase text-primary">Jennifer</h6>
-									<p class="m-b0">It is a long established fact that a reader will be distracted by the readable content of a page.</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6 m-b30">
-							<div class="service-box text-center">
-								<div class="service-images m-b15">
-									<img src="{{ asset('beauty_salon/images/our-team/pic4.jpg') }}" alt="">
-								</div>
-								<div class="service-content">
-									<h6 class="text-uppercase text-primary">Candice Marshall</h6>
-									<p class="m-b0">It is a long established fact that a reader will be distracted by the readable content of a page.</p>
-								</div>
-							</div>
-						</div>
+						@empty
+							<div class="col-12 text-center"><p>No professionals available right now.</p></div>
+						@endforelse
 					</div>
 				</div>
 			</div>

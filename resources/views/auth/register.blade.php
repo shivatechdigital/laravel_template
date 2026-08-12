@@ -59,7 +59,7 @@
 @endsection
 
 @section('content')
-<div class="page-content">
+<div class="page-content" style="padding-bottom: 0px !important;">
     <div class="register-shell">
         <div class="register-card">
             <div class="register-title">Create Account</div>

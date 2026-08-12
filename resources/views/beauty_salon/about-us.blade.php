@@ -99,6 +99,11 @@
 @endsection
 
 @section('content')
+@php
+	$aboutIntroData = $aboutIntro?->data ?? [];
+	$aboutMissionData = $aboutMissionCards?->data ?? [];
+	$missionCards = $aboutMissionData['cards'] ?? [];
+@endphp
 <div class="page-content bg-white">
         <!-- inner page banner -->
         <div class="dlab-bnr-inr overlay-primary" style="background-image:url({{ asset('beauty_salon/images/banner/bnr1.jpg') }});">
@@ -124,10 +129,10 @@
 					<div class="row align-items-center">
 						<div class="col-lg-6 col-md-12 m-b30">
 							<div class="our-story">
-								<span class="badge badge-primary p-2 m-b10">ABOUT BEAUTY ZONE</span>
-								<h2 class="title text-primary m-b15">Welcome to Beauty Zone - Your Premier Beauty Destination</h2>
-								<p class="m-b20">At Beauty Zone, we believe that true beauty comes from feeling confident and pampered. For over a decade, we have been dedicated to providing exceptional beauty and wellness services that enhance your natural radiance and leave you feeling refreshed and renewed.</p>
-								<p class="m-b20">Our state-of-the-art facility combines luxury with comfort, creating the perfect environment for your beauty journey. From rejuvenating facials to relaxing massages, professional makeup services to expert hair care, we offer a comprehensive range of treatments designed to meet all your beauty needs.</p>
+								<span class="badge badge-primary p-2 m-b10">{{ $aboutIntro?->subtitle ?: 'ABOUT BEAUTY ZONE' }}</span>
+								<h2 class="title text-primary m-b15">{{ $aboutIntro?->title ?: 'Welcome to Beauty Zone - Your Premier Beauty Destination' }}</h2>
+								<p class="m-b20">{{ $aboutIntro?->content ?: 'At Beauty Zone, we believe that true beauty comes from feeling confident and pampered.' }}</p>
+								<p class="m-b20">{{ $aboutIntroData['paragraph_2'] ?? 'Our state-of-the-art facility combines luxury with comfort, creating the perfect environment for your beauty journey.' }}</p>
 								<div class="row m-b30">
 									<div class="col-md-6 col-sm-6">
 										<div class="icon-bx-wraper left m-b20">
@@ -136,7 +141,7 @@
 											</div>
 											<div class="icon-content">
 												<h6 class="dlab-tilte">Expert Professionals</h6>
-												<p class="op7">Certified and experienced beauty specialists</p>
+												<h4 class="m-b0">{{ $aboutIntroData['phone'] ?? '001 1234 6789' }}</h4>
 											</div>
 										</div>
 									</div>
@@ -145,18 +150,18 @@
 											<div class="icon-sm text-primary m-r20">
 												<i class="flaticon-mortar fa-3x"></i>
 											</div>
-											<div class="icon-content">
+										<img src="{{ asset($aboutIntroData['image'] ?? 'beauty_salon/images/about/img1.jpg') }}" alt="Beauty Zone Spa Interior" class="radius-sm shadow">
 												<h6 class="dlab-tilte">Premium Products</h6>
 												<p class="op7">Only the finest cosmetics and skincare brands</p>
 											</div>
-										</div>
+											<h2 class="title text-white">{{ $aboutIntroData['experience'] ?? '10+' }}</h2>
 									</div>
 									<div class="col-md-6 col-sm-6">
 										<div class="icon-bx-wraper left m-b20">
 											<div class="icon-sm text-primary m-r20">
 												<i class="flaticon-candle fa-3x"></i>
 											</div>
-											<div class="icon-content">
+											<h4 class="text-primary">{{ $aboutIntroData['since'] ?? '2014' }}</h4>
 												<h6 class="dlab-tilte">Relaxing Ambiance</h6>
 												<p class="op7">Serene environment for ultimate relaxation</p>
 											</div>
@@ -217,45 +222,23 @@
 			<div class="section-full content-inner bg-gray">
 				<div class="container">
 					<div class="row">
-						<div class="col-lg-4 col-md-4 col-sm-12 m-b30">
-							<div class="feature-container">
-								<div class="feature-box style3 text-center">
-									<div class="icon-bx-sm radius bg-primary m-b20">
-										<i class="flaticon-spa text-white"></i>
-									</div>
-									<div class="icon-content">
-										<h5 class="dlab-tilte text-primary">Our Mission</h5>
-										<p>To provide exceptional beauty and wellness services that enhance our clients' natural beauty while promoting self-confidence and well-being in a luxurious, welcoming environment.</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-12 m-b30">
-							<div class="feature-container">
-								<div class="feature-box style3 text-center">
-									<div class="icon-bx-sm radius bg-primary m-b20">
-										<i class="flaticon-woman text-white"></i>
-									</div>
-									<div class="icon-content">
-										<h5 class="dlab-tilte text-primary">Our Vision</h5>
-										<p>To be the leading beauty destination, known for innovation, excellence, and personalized care that makes every client feel beautiful, confident, and completely pampered.</p>
+						@if (!empty($missionCards))
+							@foreach ($missionCards as $idx => $card)
+								<div class="col-lg-4 col-md-4 col-sm-12 m-b30">
+									<div class="feature-container">
+										<div class="feature-box style3 text-center">
+											<div class="icon-bx-sm radius bg-primary m-b20">
+												<i class="{{ $idx % 3 === 0 ? 'flaticon-spa' : ($idx % 3 === 1 ? 'flaticon-woman' : 'flaticon-mortar') }} text-white"></i>
+											</div>
+											<div class="icon-content">
+												<h5 class="dlab-tilte text-primary">{{ $card['title'] ?? 'Our Value' }}</h5>
+												<p>{{ $card['description'] ?? '' }}</p>
+											</div>
+										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-12 m-b30">
-							<div class="feature-container">
-								<div class="feature-box style3 text-center">
-									<div class="icon-bx-sm radius bg-primary m-b20">
-										<i class="flaticon-mortar text-white"></i>
-									</div>
-									<div class="icon-content">
-										<h5 class="dlab-tilte text-primary">Our Values</h5>
-										<p>Quality, integrity, and customer satisfaction drive everything we do. We are committed to using premium products, maintaining the highest standards, and exceeding expectations.</p>
-									</div>
-								</div>
-							</div>
-						</div>
+							@endforeach
+						@endif
 					</div>
 				</div>
 			</div>
@@ -271,36 +254,22 @@
 						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the.</p>
 					</div>
 					<div class="blog-carousel owl-carousel owl-btn-center-lr owl-btn-3 owl-theme owl-btn-center-lr owl-btn-1 owl-loaded owl-drag">
-						<div class="item">
-							<div class="dlab-box service-iconbox">
-								<div class="dlab-media dlab-img-overlay5"> <a href="{{ route('beauty_salon.services-details') }}"><img src="{{ asset('beauty_salon/images/blog/grid/pic1.jpg') }}" alt=""></a> </div>
-								<div class="dlab-info p-a30 p-t60 border-1 bg-white text-center">
-									<div class="icon-bx-sm radius bg-white m-b20"> <a href="{{ route('beauty_salon.services-details') }}" class="icon-cell"><i class="flaticon-woman"></i></a> </div>
-									<h5 class="dlab-title m-t0"><a href="{{ route('beauty_salon.services-details') }}">We are Professional</a></h5>
-									<p class="m-b15">Lorem ipsum dolor Fusce varius euismod lacus eget feugiat rorem ipsum dolor consectetur Fusce varius.</p>
+						@forelse ($services as $service)
+							<div class="item">
+								<div class="dlab-box service-iconbox">
+									<div class="dlab-media dlab-img-overlay5">
+										<a href="{{ route('beauty_salon.services-details') }}"><img src="{{ $service->image_path ? asset('storage/' . $service->image_path) : asset('beauty_salon/images/blog/grid/pic1.jpg') }}" alt="{{ $service->title }}"></a>
+									</div>
+									<div class="dlab-info p-a30 p-t60 border-1 bg-white text-center">
+										<div class="icon-bx-sm radius bg-white m-b20"><a href="{{ route('beauty_salon.services-details') }}" class="icon-cell"><i class="flaticon-woman"></i></a></div>
+										<h5 class="dlab-title m-t0"><a href="{{ route('beauty_salon.services-details') }}">{{ $service->title }}</a></h5>
+										<p class="m-b15">{{ $service->description ?: 'Premium salon service managed from admin panel.' }}</p>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="item">
-							<div class="dlab-box service-iconbox">
-								<div class="dlab-media dlab-img-overlay5"> <a href="{{ route('beauty_salon.services-details') }}"><img src="{{ asset('beauty_salon/images/blog/grid/pic2.jpg') }}" alt=""></a> </div>
-								<div class="dlab-info p-a30 p-t60 border-1 bg-white text-center">
-									<div class="icon-bx-sm radius bg-white m-b20"> <a href="{{ route('beauty_salon.services-details') }}" class="icon-cell"><i class="flaticon-mortar"></i></a> </div>
-									<h5 class="dlab-title m-t0"><a href="{{ route('beauty_salon.services-details') }}">Lux Cosmetic</a></h5>
-									<p class="m-b15">Lorem ipsum dolor Fusce varius euismod lacus eget feugiat rorem ipsum dolor consectetur Fusce varius.</p>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="dlab-box service-iconbox">
-								<div class="dlab-media dlab-img-overlay5"> <a href="{{ route('beauty_salon.services-details') }}"><img src="{{ asset('beauty_salon/images/blog/grid/pic3.jpg') }}" alt=""></a> </div>
-								<div class="dlab-info p-a30 p-t60 border-1 bg-white text-center">
-									<div class="icon-bx-sm radius bg-white m-b20"> <a href="{{ route('beauty_salon.services-details') }}" class="icon-cell"><i class="flaticon-candle"></i></a> </div>
-									<h5 class="dlab-title m-t0"><a href="{{ route('beauty_salon.services-details') }}">Medical Education</a></h5>
-									<p class="m-b15">Lorem ipsum dolor Fusce varius euismod lacus eget feugiat rorem ipsum dolor consectetur Fusce varius.</p>
-								</div>
-							</div>
-						</div>
+						@empty
+							<div class="item"><p class="text-center">No services available.</p></div>
+						@endforelse
 					</div>
 				</div>
 			</div>

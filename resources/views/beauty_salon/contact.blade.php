@@ -28,38 +28,34 @@
 					<!-- right part start -->
 					<div class="col-lg-4 col-md-6 d-flex">
                         <div class="p-a30 border m-b30 contact-area border-1 align-self-stretch ">
-							<h4 class="m-b10">Quick Contact</h4>
-							<p>If you have any questions simply use the following contact details.</p>
+							<h4 class="m-b10">{{ $contactInfo['title'] }}</h4>
+							<p>{{ $contactInfo['subtitle'] }}</p>
                             <ul class="no-margin">
                                 <li class="icon-bx-wraper left m-b30">
                                     <div class="icon-bx-xs border-1"> <span class="icon-cell text-primary"><i class="ti-location-pin"></i></span> </div>
                                     <div class="icon-content">
                                         <h6 class="text-uppercase m-tb0 dlab-tilte">Address:</h6>
-                                        <p>97 C Block Panki Kanpur</p>
+										<p>{{ $contactInfo['address'] }}</p>
                                     </div>
                                 </li>
                                 <li class="icon-bx-wraper left  m-b30">
                                     <div class="icon-bx-xs border-1"> <span class="icon-cell text-primary"><i class="ti-email"></i></span> </div>
                                     <div class="icon-content">
                                         <h6 class="text-uppercase m-tb0 dlab-tilte">Email:</h6>
-                                        <p>info@example.com</p>
+										<p><a href="mailto:{{ $contactInfo['email'] }}">{{ $contactInfo['email'] }}</a></p>
                                     </div>
                                 </li>
                                 <li class="icon-bx-wraper left">
                                     <div class="icon-bx-xs border-1"> <span class="icon-cell text-primary"><i class="ti-mobile"></i></span> </div>
                                     <div class="icon-content">
                                         <h6 class="text-uppercase m-tb0 dlab-tilte">PHONE</h6>
-                                        <p>+91 7007294764</p>
+										<p><a href="tel:{{ preg_replace('/\s+/', '', $contactInfo['phone']) }}">{{ $contactInfo['phone'] }}</a></p>
                                     </div>
                                 </li>
                             </ul>
 							<div class="m-t20">
 								<ul class="dlab-social-icon dlab-social-icon-lg">
-									<li><a target="_blank" href="https://www.facebook.com/" class="fa fa-facebook bg-primary"></a></li>
-									<li><a target="_blank" href="https://twitter.com/" class="fa fa-twitter bg-primary"></a></li>
-									<li><a target="_blank" href="https://www.linkedin.com/" class="fa fa-linkedin bg-primary"></a></li>
-									<li><a target="_blank" href="https://www.instagram.com/" class="fa fa-instagram bg-primary"></a></li>
-									<li><a target="_blank" href="https://www.google.com/" class="fa fa-google-plus bg-primary"></a></li>
+                                    @include('beauty_salon.partials.social-links', ['mode' => 'contact'])
 								</ul>
 							</div>
                         </div>
@@ -124,7 +120,7 @@
                     </div>
                     <!-- Left part END -->
 					<div class="col-lg-4 col-md-12 d-flex m-b30">
-						<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d227748.3825624477!2d75.65046970649679!3d26.88544791796718!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396c4adf4c57e281%3A0xce1c63a0cf22e09!2sJaipur%2C+Rajasthan!5e0!3m2!1sen!2sin!4v1500819483219" class="align-self-stretch " style="border:0; width:100%; height:100%;" allowfullscreen></iframe>
+                        <iframe src="{{ $contactInfo['map_embed'] }}" class="align-self-stretch " style="border:0; width:100%; height:100%;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 					</div>
                 </div>
             </div>
