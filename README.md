@@ -1,58 +1,203 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# BeautyZone Salon CMS + Billing Platform
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A complete Laravel-based beauty salon website with a dynamic admin panel.
 
-## About Laravel
+This project is not just a static template conversion. It includes:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Role-based authentication
+- Dynamic public pages managed from admin
+- Team, services, pricing, gallery, social links CMS
+- Membership management
+- Phone-first admin billing workflow
+- Per-user service and billing history
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Project Highlights
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Public Website
 
-## Learning Laravel
+- Home page with dynamic sections
+- About page with editable intro and mission cards
+- Dynamic services page (main service + sub-services)
+- Dynamic pricing page (main service description + sub-service pricing)
+- Dynamic gallery page (images + video links)
+- Dynamic team pages:
+	- Home shows max 4 members using home toggle and featured priority
+	- Team page shows all active professionals
+- Dynamic contact page:
+	- Address, phone, email editable from admin
+	- Map supports iframe HTML, full embed URL, or embed path
+- Membership plans listing page
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Authentication and User Roles
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Register/Login/Logout
+- Forgot password + reset password
+- Role support:
+	- `admin`
+	- `user`
+- Dedicated dashboards for admin and user
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Admin Panel Modules
 
-## Agentic Development
+### 1) Services Management
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+- Create, update, delete services
+- Add sub-services
+- Service image upload
+- Active/deactive toggle
+- Sort order support
+
+### 2) Pricing Management
+
+- Manage pricing by service
+- Main description + sub-service pricing lines
+- Active/deactive toggle
+- Sort order support
+
+### 3) Gallery Management
+
+- Image and video entries
+- Active/deactive toggle
+- Sort order support
+
+### 4) Team Members Management
+
+- Add/edit/remove professionals
+- `Show on Home` toggle
+- `Home Featured Priority` for better home ordering
+- Active/deactive toggle
+- Team image upload with preview and ratio guidance
+
+### 5) Social Links Management
+
+- Single source for all social platforms
+- Used across header, footer, contact, author/share areas
+
+### 6) Content Blocks Management
+
+- Structured block editing for Home, About, Contact
+- Contact block uses field-based admin inputs (no JSON required for admin)
+
+### 7) Template/Page Editor
+
+- Edit Blade templates from admin panel
+
+### 8) Membership Plans (Phase 1)
+
+- Plan fields:
+	- Name
+	- Price
+	- Discount type (`flat` or `percentage`)
+	- Discount value
+	- Final price (auto-calculated)
+	- Expiry days
+	- Active/deactive
+- Discount validations:
+	- Flat discount cannot exceed price
+	- Percentage cannot exceed 100
+
+### 9) Phone-First Billing Module
+
+- Admin creates bill by phone number first
+- Two scenarios supported:
+
+1. Existing user found by phone
+	 - Show user details
+	 - Show active membership status
+	 - Option to add membership in current bill
+	 - Add service quantities
+	 - Generate final bill
+
+2. User not found by phone
+	 - Admin enters name, gender, optional email
+	 - User account created automatically
+	 - Random password generated in backend
+	 - If email exists, password email is attempted
+	 - Optional membership can be added
+	 - Services added and final bill generated
+
+- Billing outputs:
+	- Membership amount
+	- Services amount
+	- Final total
+	- Bill detail page
+	- Billing history
+	- Per-user bill/service records
+
+## User Dashboard
+
+- Booking history and status tracking
+- Membership history and status
+- Profile update
+- Password update
+
+## Seed Data
+
+Seeder includes sample:
+
+- Admin and normal user
+- Services
+- Pricing
+- Gallery
+- Team
+- Social links
+- Content blocks
+- Membership plans
+
+Default seeded credentials:
+
+- Admin: `admin@gmail.com` / `password`
+- User: `user@gmail.com` / `password`
+
+## Tech Stack
+
+- Laravel (PHP)
+- Blade templates
+- Eloquent ORM
+- MySQL-compatible migrations
+
+## Setup Guide
+
+### 1) Install dependencies
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+composer install
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 2) Environment setup
 
-## Contributing
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 3) Database configuration
 
-## Code of Conduct
+Update DB credentials in `.env`, then run:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+php artisan migrate
+php artisan db:seed
+```
 
-## Security Vulnerabilities
+### 4) Run application
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+php artisan serve
+```
+
+## Useful Commands
+
+```bash
+php artisan migrate
+php artisan db:seed --class=CmsContentSeeder
+php artisan optimize:clear
+```
+
+## Business Outcome
+
+This platform allows a salon owner to run website content, customer memberships, and day-to-day billing operations from one admin panel, without depending on developers for every text/media/update change.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project uses the MIT license.
